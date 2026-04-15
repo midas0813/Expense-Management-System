@@ -204,7 +204,7 @@ function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1>💰 Expense Management</h1>
+        <h1>Expense Management</h1>
         <div className="user-info">
           <span className="user-name">{currentUser.name}</span>
           <span className="user-role">{currentUser.role}</span>

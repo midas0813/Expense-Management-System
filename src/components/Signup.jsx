@@ -34,7 +34,7 @@ function Signup({ onSignup, onSwitchToLogin }) {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h1>💰 Expense Management</h1>
+        <h1>Expense Management</h1>
         <h2>Sign Up</h2>
         
         <form onSubmit={handleSubmit}>
