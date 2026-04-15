@@ -3,7 +3,17 @@ import { useState } from 'react'
 function ExpenseList({ expenses, currentUser, users, onApproval }) {
   const [expandedPhoto, setExpandedPhoto] = useState(null)
   
-  const getUserName = (userId) => users.find(u => u.id === userId)?.name || 'Unknown'
+  const getUserName = (userId) => users.find(u => u.id === userId)?.name || '不明'
+
+  const getStatusLabel = (status) => {
+    const labels = {
+      'pending_supervisor': '管理者承認待ち',
+      'pending_president': '社長承認待ち',
+      'approved': '承認済み',
+      'rejected': '却下'
+    }
+    return labels[status] || status
+  }
 
   const canApprove = (expense) => {
     if (expense.status === 'pending_supervisor' && currentUser.role === 'supervisor') return true
@@ -14,16 +24,16 @@ function ExpenseList({ expenses, currentUser, users, onApproval }) {
   return (
     <>
       <div className="card">
-        <h2>Expense Requests</h2>
+        <h2>経費申請一覧</h2>
         {expenses.length === 0 ? (
-          <p style={{ color: '#666', textAlign: 'center', padding: '2rem' }}>No expenses yet</p>
+          <p style={{ color: '#666', textAlign: 'center', padding: '2rem' }}>まだ経費がありません</p>
         ) : (
           expenses.map(expense => (
           <div key={expense.id} className="expense-item">
             <div className="expense-header">
               <div className="expense-amount">¥{expense.amount.toLocaleString()}</div>
               <span className={`status-badge status-${expense.status}`}>
-                {expense.status.replace('_', ' ')}
+                {getStatusLabel(expense.status)}
               </span>
             </div>
             <div className="expense-meta">
@@ -35,17 +45,17 @@ function ExpenseList({ expenses, currentUser, users, onApproval }) {
               <div className="expense-photo-container">
                 <img 
                   src={expense.photoUrl} 
-                  alt="Receipt" 
+                  alt="領収書" 
                   className="expense-photo-thumb"
                   onClick={() => setExpandedPhoto(expense.photoUrl)}
                 />
-                <span className="photo-label">📷 Receipt attached</span>
+                <span className="photo-label">📷 領収書添付済み</span>
               </div>
             )}
             
             {expense.approvedBy.length > 0 && (
               <div style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
-                Approved by: {expense.approvedBy.map(id => getUserName(id)).join(', ')}
+                承認者: {expense.approvedBy.map(id => getUserName(id)).join(', ')}
               </div>
             )}
 
@@ -55,13 +65,13 @@ function ExpenseList({ expenses, currentUser, users, onApproval }) {
                   className="btn btn-success"
                   onClick={() => onApproval(expense.id, 'approve')}
                 >
-                  ✓ Approve
+                  ✓ 承認
                 </button>
                 <button 
                   className="btn btn-danger"
                   onClick={() => onApproval(expense.id, 'reject')}
                 >
-                  ✗ Reject
+                  ✗ 却下
                 </button>
               </div>
             )}

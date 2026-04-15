@@ -25,13 +25,13 @@ function EmployeeDashboard({
     <div>
       <nav className="tabs">
         <button className={activeTab === 'expenses' ? 'active' : ''} onClick={() => setActiveTab('expenses')}>
-          My Expenses
+          マイ経費
         </button>
         <button className={activeTab === 'suggestions' ? 'active' : ''} onClick={() => setActiveTab('suggestions')}>
-          Suggestions
+          改善提案
         </button>
         <button className={activeTab === 'requests' ? 'active' : ''} onClick={() => setActiveTab('requests')}>
-          Supervisor Requests
+          管理者からの質問
         </button>
       </nav>
 

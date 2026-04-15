@@ -21,13 +21,13 @@ function SupervisorDashboard({
     <div>
       <nav className="tabs">
         <button className={activeTab === 'approvals' ? 'active' : ''} onClick={() => setActiveTab('approvals')}>
-          Pending Approvals ({pendingExpenses.length})
+          承認待ち ({pendingExpenses.length})
         </button>
         <button className={activeTab === 'all' ? 'active' : ''} onClick={() => setActiveTab('all')}>
-          All Expenses
+          全ての経費
         </button>
         <button className={activeTab === 'suggestions' ? 'active' : ''} onClick={() => setActiveTab('suggestions')}>
-          Suggestions
+          改善提案
         </button>
       </nav>
 

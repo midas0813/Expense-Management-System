@@ -1,13 +1,22 @@
 function SignupApproval({ requests, onApprove, onReject }) {
   const pendingRequests = requests.filter(r => r.status === 'pending')
 
+  const getRoleLabel = (role) => {
+    const labels = {
+      employee: '社員',
+      supervisor: '管理者',
+      president: '社長'
+    }
+    return labels[role] || role
+  }
+
   return (
     <div className="card">
-      <h2>Signup Requests ({pendingRequests.length})</h2>
+      <h2>登録申請 ({pendingRequests.length})</h2>
       
       {pendingRequests.length === 0 ? (
         <p style={{ color: '#666', textAlign: 'center', padding: '2rem' }}>
-          No pending signup requests
+          承認待ちの登録申請はありません
         </p>
       ) : (
         pendingRequests.map(request => (
@@ -16,11 +25,11 @@ function SignupApproval({ requests, onApprove, onReject }) {
               <div>
                 <h3>{request.name}</h3>
                 <div className="request-meta">
-                  {request.email} • Requested: {request.date}
+                  {request.email} • 申請日: {request.date}
                 </div>
               </div>
               <span className="status-badge" style={{ background: '#fef3c7', color: '#92400e' }}>
-                {request.requestedRole}
+                {getRoleLabel(request.requestedRole)}
               </span>
             </div>
             
@@ -30,9 +39,9 @@ function SignupApproval({ requests, onApprove, onReject }) {
                 defaultValue={request.requestedRole}
                 style={{ padding: '0.5rem', marginRight: '0.5rem', borderRadius: '8px', border: '1px solid #ddd' }}
               >
-                <option value="employee">Employee</option>
-                <option value="supervisor">Supervisor</option>
-                <option value="president">President</option>
+                <option value="employee">社員</option>
+                <option value="supervisor">管理者</option>
+                <option value="president">社長</option>
               </select>
               
               <button
@@ -42,14 +51,14 @@ function SignupApproval({ requests, onApprove, onReject }) {
                   onApprove(request.id, role)
                 }}
               >
-                ✓ Approve
+                ✓ 承認
               </button>
               
               <button
                 className="btn btn-danger"
                 onClick={() => onReject(request.id)}
               >
-                ✗ Reject
+                ✗ 却下
               </button>
             </div>
           </div>

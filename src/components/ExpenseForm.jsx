@@ -10,7 +10,7 @@ function ExpenseForm({ onSubmit }) {
     const file = e.target.files[0]
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        alert('File size must be less than 5MB')
+        alert('ファイルサイズは5MB以下にしてください')
         return
       }
       
@@ -41,10 +41,10 @@ function ExpenseForm({ onSubmit }) {
 
   return (
     <div className="card">
-      <h2>Submit Expense Request</h2>
+      <h2>経費申請</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Amount (¥)</label>
+          <label>金額 (¥)</label>
           <input
             type="number"
             value={amount}
@@ -54,17 +54,17 @@ function ExpenseForm({ onSubmit }) {
           />
         </div>
         <div className="form-group">
-          <label>Reason</label>
+          <label>理由</label>
           <textarea
             value={reason}
             onChange={(e) => setReason(e.target.value)}
-            placeholder="Client meeting lunch expenses..."
+            placeholder="クライアントとの会食費用..."
             required
           />
         </div>
         
         <div className="form-group">
-          <label>Receipt Photo (Optional)</label>
+          <label>領収書の写真（任意）</label>
           <div className="photo-upload-area">
             {!photoPreview ? (
               <label className="upload-label">
@@ -75,28 +75,28 @@ function ExpenseForm({ onSubmit }) {
                   style={{ display: 'none' }}
                 />
                 <div className="upload-placeholder">
-                  📷 Click to upload receipt
+                  📷 クリックして領収書をアップロード
                   <div style={{ fontSize: '0.85rem', color: '#666', marginTop: '0.5rem' }}>
-                    Max 5MB • JPG, PNG, GIF
+                    最大5MB • JPG, PNG, GIF
                   </div>
                 </div>
               </label>
             ) : (
               <div className="photo-preview">
-                <img src={photoPreview} alt="Receipt preview" />
+                <img src={photoPreview} alt="領収書プレビュー" />
                 <button
                   type="button"
                   className="btn-remove-photo"
                   onClick={handleRemovePhoto}
                 >
-                  ✕ Remove
+                  ✕ 削除
                 </button>
               </div>
             )}
           </div>
         </div>
         
-        <button type="submit" className="btn btn-primary">Submit Request</button>
+        <button type="submit" className="btn btn-primary">申請を送信</button>
       </form>
     </div>
   )

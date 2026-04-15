@@ -21,10 +21,10 @@ function Signup({ onSignup, onSwitchToLogin }) {
       <div className="auth-container">
         <div className="auth-card">
           <div className="success-message">
-            ✓ Signup request submitted! Please wait for admin approval.
+            ✓ 登録申請が送信されました！管理者の承認をお待ちください。
           </div>
           <button className="btn btn-primary btn-full" onClick={onSwitchToLogin}>
-            Back to Login
+            ログインに戻る
           </button>
         </div>
       </div>
@@ -34,23 +34,23 @@ function Signup({ onSignup, onSwitchToLogin }) {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h1>Expense Management</h1>
-        <h2>Sign Up</h2>
+        <h1>💰 経費管理システム</h1>
+        <h2>新規登録</h2>
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Full Name</label>
+            <label>氏名</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Tanaka Taro"
+              placeholder="田中 太郎"
               required
             />
           </div>
           
           <div className="form-group">
-            <label>Email</label>
+            <label>メールアドレス</label>
             <input
               type="email"
               value={email}
@@ -61,37 +61,37 @@ function Signup({ onSignup, onSwitchToLogin }) {
           </div>
           
           <div className="form-group">
-            <label>Password</label>
+            <label>パスワード</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Create password"
+              placeholder="パスワードを作成"
               required
               minLength="6"
             />
           </div>
           
           <div className="form-group">
-            <label>Requested Role</label>
+            <label>希望する役職</label>
             <select value={requestedRole} onChange={(e) => setRequestedRole(e.target.value)}>
-              <option value="employee">Employee</option>
-              <option value="supervisor">Supervisor</option>
+              <option value="employee">社員</option>
+              <option value="supervisor">管理者</option>
             </select>
             <small style={{ color: '#666', fontSize: '0.85rem' }}>
-              Admin will review and assign your role
+              管理者が役職を確認して割り当てます
             </small>
           </div>
           
           <button type="submit" className="btn btn-primary btn-full">
-            Submit Request
+            申請を送信
           </button>
         </form>
         
         <div className="auth-footer">
-          Already have an account? 
+          既にアカウントをお持ちの方は 
           <button className="link-btn" onClick={onSwitchToLogin}>
-            Login
+            ログイン
           </button>
         </div>
       </div>

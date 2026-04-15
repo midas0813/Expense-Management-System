@@ -26,19 +26,19 @@ function PresidentDashboard({
     <div>
       <nav className="tabs">
         <button className={activeTab === 'overview' ? 'active' : ''} onClick={() => setActiveTab('overview')}>
-          Overview
+          概要
         </button>
         <button className={activeTab === 'approvals' ? 'active' : ''} onClick={() => setActiveTab('approvals')}>
-          Pending Approvals ({pendingExpenses.length})
+          承認待ち ({pendingExpenses.length})
         </button>
         <button className={activeTab === 'expenses' ? 'active' : ''} onClick={() => setActiveTab('expenses')}>
-          All Expenses
+          全ての経費
         </button>
         <button className={activeTab === 'suggestions' ? 'active' : ''} onClick={() => setActiveTab('suggestions')}>
-          Suggestions
+          改善提案
         </button>
         <button className={activeTab === 'signups' ? 'active' : ''} onClick={() => setActiveTab('signups')}>
-          Signup Requests {pendingSignups > 0 && `(${pendingSignups})`}
+          登録申請 {pendingSignups > 0 && `(${pendingSignups})`}
         </button>
       </nav>
 
@@ -48,24 +48,24 @@ function PresidentDashboard({
             <div className="stats-grid">
               <div className="stat-card">
                 <div className="stat-value">¥{totalApproved.toLocaleString()}</div>
-                <div className="stat-label">Total Approved</div>
+                <div className="stat-label">承認済み合計</div>
               </div>
               <div className="stat-card">
                 <div className="stat-value">{approvedExpenses.length}</div>
-                <div className="stat-label">Approved Expenses</div>
+                <div className="stat-label">承認済み経費</div>
               </div>
               <div className="stat-card">
                 <div className="stat-value">{pendingExpenses.length}</div>
-                <div className="stat-label">Pending Approval</div>
+                <div className="stat-label">承認待ち</div>
               </div>
               <div className="stat-card">
                 <div className="stat-value">{suggestions.length}</div>
-                <div className="stat-label">Suggestions</div>
+                <div className="stat-label">改善提案</div>
               </div>
             </div>
 
             <div style={{ marginTop: '2rem' }}>
-              <h2 style={{ marginBottom: '1rem' }}>Recent Activity</h2>
+              <h2 style={{ marginBottom: '1rem' }}>最近のアクティビティ</h2>
               <ExpenseList 
                 expenses={expenses.slice(0, 5)}
                 currentUser={currentUser}

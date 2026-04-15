@@ -18,14 +18,14 @@ function Login({ onLogin, onSwitchToSignup }) {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h1>Expense Management</h1>
-        <h2>Login</h2>
+        <h1>💰 経費管理システム</h1>
+        <h2>ログイン</h2>
         
         {error && <div className="error-message">{error}</div>}
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Email</label>
+            <label>メールアドレス</label>
             <input
               type="email"
               value={email}
@@ -36,33 +36,33 @@ function Login({ onLogin, onSwitchToSignup }) {
           </div>
           
           <div className="form-group">
-            <label>Password</label>
+            <label>パスワード</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
+              placeholder="パスワードを入力"
               required
             />
           </div>
           
           <button type="submit" className="btn btn-primary btn-full">
-            Login
+            ログイン
           </button>
         </form>
         
         <div className="auth-footer">
-          Don't have an account? 
+          アカウントをお持ちでない方は 
           <button className="link-btn" onClick={onSwitchToSignup}>
-            Sign up
+            新規登録
           </button>
         </div>
 
         <div className="demo-credentials">
-          <strong>Demo Accounts:</strong>
-          <div>President: yamada@company.com / admin123</div>
-          <div>Supervisor: suzuki@company.com / pass123</div>
-          <div>Employee: tanaka@company.com / pass123</div>
+          <strong>デモアカウント:</strong>
+          <div>社長: yamada@company.com / admin123</div>
+          <div>管理者: suzuki@company.com / pass123</div>
+          <div>社員: tanaka@company.com / pass123</div>
         </div>
       </div>
     </div>

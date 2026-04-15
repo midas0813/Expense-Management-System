@@ -3,7 +3,17 @@ import { useState } from 'react'
 function SuggestionList({ suggestions, currentUser, users, onLike, onComment }) {
   const [commentTexts, setCommentTexts] = useState({})
 
-  const getUserName = (userId) => users.find(u => u.id === userId)?.name || 'Unknown'
+  const getUserName = (userId) => users.find(u => u.id === userId)?.name || '不明'
+
+  const getCategoryLabel = (category) => {
+    const labels = {
+      'efficiency': '効率化',
+      'budget': '予算',
+      'process': 'プロセス',
+      'tools': 'ツール'
+    }
+    return labels[category] || category
+  }
 
   const handleCommentSubmit = (suggestionId) => {
     const text = commentTexts[suggestionId]
@@ -15,16 +25,16 @@ function SuggestionList({ suggestions, currentUser, users, onLike, onComment }) 
 
   return (
     <div className="card">
-      <h2>Improvement Suggestions</h2>
+      <h2>改善提案一覧</h2>
       {suggestions.length === 0 ? (
-        <p style={{ color: '#666', textAlign: 'center', padding: '2rem' }}>No suggestions yet</p>
+        <p style={{ color: '#666', textAlign: 'center', padding: '2rem' }}>まだ提案がありません</p>
       ) : (
         suggestions.map(suggestion => (
           <div key={suggestion.id} className="suggestion-item">
             <div className="suggestion-header">
               <h3>{suggestion.title}</h3>
               <span className="status-badge" style={{ background: '#e0e7ff', color: '#3730a3' }}>
-                {suggestion.category}
+                {getCategoryLabel(suggestion.category)}
               </span>
             </div>
             <div className="suggestion-meta">
@@ -39,7 +49,7 @@ function SuggestionList({ suggestions, currentUser, users, onLike, onComment }) 
               >
                 👍 {suggestion.likes}
               </button>
-              <span style={{ color: '#666' }}>{suggestion.comments.length} comments</span>
+              <span style={{ color: '#666' }}>{suggestion.comments.length} コメント</span>
             </div>
 
             {suggestion.comments.length > 0 && (
@@ -58,7 +68,7 @@ function SuggestionList({ suggestions, currentUser, users, onLike, onComment }) 
             <div className="comment-form">
               <input
                 type="text"
-                placeholder="Add a comment..."
+                placeholder="コメントを追加..."
                 value={commentTexts[suggestion.id] || ''}
                 onChange={(e) => setCommentTexts({ ...commentTexts, [suggestion.id]: e.target.value })}
                 onKeyPress={(e) => e.key === 'Enter' && handleCommentSubmit(suggestion.id)}
@@ -67,7 +77,7 @@ function SuggestionList({ suggestions, currentUser, users, onLike, onComment }) 
                 className="btn btn-secondary"
                 onClick={() => handleCommentSubmit(suggestion.id)}
               >
-                Comment
+                コメント
               </button>
             </div>
           </div>

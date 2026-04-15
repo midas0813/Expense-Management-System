@@ -32,10 +32,10 @@ function App() {
   const handleLogin = (email, password) => {
     const user = users.find(u => u.email === email && u.password === password)
     if (!user) {
-      return { success: false, message: 'Invalid email or password' }
+      return { success: false, message: 'メールアドレスまたはパスワードが正しくありません' }
     }
     if (user.status !== 'active') {
-      return { success: false, message: 'Account is not active. Please wait for approval.' }
+      return { success: false, message: 'アカウントが有効化されていません。承認をお待ちください。' }
     }
     setCurrentUser(user)
     setIsAuthenticated(true)
@@ -47,6 +47,15 @@ function App() {
     setCurrentUser(null)
     setIsAuthenticated(false)
     localStorage.removeItem('currentUser')
+  }
+
+  const getRoleLabel = (role) => {
+    const labels = {
+      employee: '社員',
+      supervisor: '管理者',
+      president: '社長'
+    }
+    return labels[role] || role
   }
 
   const handleSignup = (signupData) => {
@@ -204,11 +213,11 @@ function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1>Expense Management</h1>
+        <h1>💰 経費管理システム</h1>
         <div className="user-info">
           <span className="user-name">{currentUser.name}</span>
-          <span className="user-role">{currentUser.role}</span>
-          <button className="btn-logout" onClick={handleLogout}>Logout</button>
+          <span className="user-role">{getRoleLabel(currentUser.role)}</span>
+          <button className="btn-logout" onClick={handleLogout}>ログアウト</button>
         </div>
       </header>
 
